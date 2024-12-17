@@ -40,7 +40,7 @@
                     <input type="email" id="email" name="email" required><br><br>
                 
                     <label for="phone">Phone Number:</label><br>
-                    <input type="tel" id="phone" name="phone" required><br><br>
+                    <input type="text" id="phone" name="phone" required><br><br>
                 
                     <label for="address">Address:</label><br>
                     <input type="text" id="address" name="address" required><br><br>
