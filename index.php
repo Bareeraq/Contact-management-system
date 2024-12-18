@@ -16,24 +16,28 @@ if (isset($_GET['message'])) {
     echo "<p style='color: green;'>" . htmlspecialchars($_GET['message']) . "</p>";
 }
 
-// Search functionality
-$search = isset($_GET['search']) ? $_GET['search'] : ''; //search term
+// Get search and sort parameters
+$search = isset($_GET['search']) ? $_GET['search'] : ''; // search term
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'ASC'; // sorting order (default is ASC)
+
+// Base SQL query
 $sql = "SELECT id, first_name, last_name, email, phone, address, gender FROM contacts";
+
+// Add search and sorting conditions
 if ($search) {
-    $sql = "SELECT id, first_name, last_name, email, phone, address, gender 
-            FROM contacts 
-            WHERE first_name LIKE ? OR last_name LIKE ?";
-    $stmt = $conn->prepare($sql);
+    $sql .= " WHERE first_name LIKE ? OR last_name LIKE ?";
+}
+$sql .= " ORDER BY first_name $sort";
 
-    if (!$stmt) {
-        die("SQL Error: " . $conn->error);
-    }
+$stmt = $conn->prepare($sql);
 
+if (!$stmt) {
+    die("SQL Error: " . $conn->error);
+}
+
+if ($search) {
     $searchTerm = "%" . $search . "%";
     $stmt->bind_param("ss", $searchTerm, $searchTerm);
-} else {
-    $sql = "SELECT id, first_name, last_name, email, phone, address, gender FROM contacts";
-    $stmt = $conn->prepare($sql);
 }
 
 $stmt->execute();
@@ -75,8 +79,16 @@ if (!$result) {
                     <button type="submit">Search</button>
                 </form>
                 </div> 
+                <!-- Sorting Links -->
+                <div class="sorting">
+                    <p>Sort by Name: 
+                        <a href="index.php?search=<?php echo urlencode($search); ?>&sort=ASC">Ascending</a> | 
+                        <a href="index.php?search=<?php echo urlencode($search); ?>&sort=DESC">Descending</a>
+                    </p>
+                </div>
                 
                 <h2>Contact List</h2>
+
                 <table>
                     <thead>
                         <tr>
