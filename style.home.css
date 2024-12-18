@@ -60,10 +60,10 @@ body, html {
 /* Wrapper for main content */
 .main-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     min-height: 100vh;
-    margin-left: 120px; /* Matches sidebar width */
+    margin-left: 100px; /* Matches sidebar width */
     background-color: #f9f9f9;
     padding: 20px;
     width: calc(100% - 250px);
@@ -77,8 +77,8 @@ body, html {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    max-width: 800px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .main-content h1 {
@@ -128,28 +128,64 @@ button:hover, a:hover {
     margin-left: 15px;
 }
 
-table {
-    border-collapse: separate; 
-    border-spacing: 10px; 
+/* Table Container Styling */
+.table-container {
     width: 100%;
+    overflow-x: auto; 
+    margin-top: 20px; 
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse; 
+    background-color: #f9f9f9; 
     border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Prevent table overflow */
+    box-sizing: border-box;
 }
 
 th, td {
-    padding: 5px; 
-    text-align: center;
+    padding: 12px; 
+    text-align: center; 
+    border-bottom: 1px solid #ddd; 
+}
+
+th {
+    background-color: #2c3e50; 
+    color: white;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Responsive Design for Table */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto; /* Enable scroll for small screens */
+    }
+
+    th, td {
+        padding: 8px; /* Reduce padding on small devices */
+        font-size: 14px;
+    }
 }
 
 
 /* Responsive Sidebar */
 @media (max-width: 768px) {
     .sidebar {
-        width: 100px;
+        width: 80px;
     }
     .sidebar h2, .sidebar ul li a {
         font-size: 14px;
     }
     .main-wrapper {
-        margin-left: 100px;
+        margin-left: 80px;
     }
 }
