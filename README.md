@@ -20,7 +20,7 @@ The primary purpose of the system is to allow users to manage a contact list, pe
 
 
 ## Tech Stack
-- Frontend: HTML, CSS, JavaScript (if applicable)
+- Frontend: HTML, CSS
 - Backend: PHP
 - Database: MySQL
 
