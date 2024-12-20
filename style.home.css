@@ -7,69 +7,120 @@ body, html {
     line-height: 1.6;
 }
 
-    /* Dashboard Container */
-.dashboard {
+/*======================================================================== Navigation Bar =============================================================================*/
+
+.navbar {
+    top:0;
+    height: 40px;
+    background-color: #2c3e50; /* Dark background for the navbar */
+    padding: 30px 0;
+    position: fixed; /* Keeps the navbar at the top while scrolling */
+    width: 100%;
+    z-index: 1000;
     display: flex;
-    min-height: 100vh;
+    justify-content: center; /* Centers the navigation items */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-    /* Sidebar Styling */
-.sidebar {
-    width: 250px;
-    background-color: #2c3e50;
-    color: white;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #ecf0f1;
-    border-bottom: 1px solid #7f8c8d;
-    padding-bottom: 10px;
-}
-
-.sidebar ul {
+.navbar ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Spacing between navigation items */
+}
+
+.navbar ul li {
+    margin: 0;
     padding: 0;
 }
 
-.sidebar ul li {
-    margin: 15px 0;
-}
-
-.sidebar ul li a {
+.navbar ul li a {
     text-decoration: none;
-    color: #ecf0f1;
+    color: white;
     font-size: 18px;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
-.sidebar ul li a:hover {
-    background-color: #34495e;
+.navbar ul li a:hover {
+    background-color: #34495e; /* Hover effect for links */
 }
 
-/* Wrapper for main content */
+/* Main Wrapper Styling */
 .main-wrapper {
+    margin-top: 65px; /* Adjust for the height of the nav */
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
-    min-height: 100vh;
-    margin-left: 100px; /* Matches sidebar width */
     background-color: #f9f9f9;
     padding: 20px;
-    width: calc(100% - 250px);
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
-/* Main content styling */
+/* Flexbox for Contact List Header */
+.contact-header {
+    display: flex; /* Flex container */
+    justify-content: space-between; /* Space between heading and search box */
+    align-items: center; /* Vertically center items */
+    margin-bottom: 20px; /* Add some spacing below the header */
+}
+
+.contact-header h2 {
+    margin: 0; /* Remove default margin for better alignment */
+    font-size: 35px; /* Adjust font size if needed */
+    font-weight: bold;
+    color: #2c3e50; /* Match the theme color */
+}
+
+/*==================================================================== Search Box =====================================================================================*/
+
+.search-box {
+    display: flex;
+    justify-content: flex-start; /* Aligns the search bar and button in one row */
+    align-items: center; /* Ensures both are vertically centered */
+    gap: 5px; /* Adds space between the input and button */
+    margin: 20px 0;
+}
+
+.search-box form {
+    display: flex;
+    gap: 10px; /* Adds spacing between the input and the button */
+}
+
+.search-box input[type="text"] {
+    height: 45px; /* Ensure consistent height */
+    width: 50%;
+    padding: 10px 40px; /* Adjust padding for better appearance */
+    border: 1px solid #ccc; 
+    border-radius: 4px; /* Rounded corners */
+    font-size: 20px; 
+    outline: none;
+}
+
+.search-box button {
+    height: 40px; /* Match the height of the input field */
+    padding: 0 20px; /* Adds padding to the button */
+    background-color: #2c3e50; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Removes button border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer; /* Changes the cursor to pointer on hover */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+}
+
+.search-box button:hover {
+    background-color: #34495e; 
+}
+
+/*================================================================== Main Content Styling ============================================================================*/
+
 .main-content {
     text-align: center;
     padding: 40px;
@@ -164,7 +215,7 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* Responsive Design for Table */
+/*========================================================== Responsive Design for Table ===============================================================================*/
 @media (max-width: 768px) {
     .table-container {
         overflow-x: auto; /* Enable scroll for small screens */
@@ -176,16 +227,9 @@ tr:nth-child(even) {
     }
 }
 
-
-/* Responsive Sidebar */
+/* Responsive Dashboard */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 80px;
-    }
-    .sidebar h2, .sidebar ul li a {
+    .navbar ul li a {
         font-size: 14px;
-    }
-    .main-wrapper {
-        margin-left: 80px;
     }
 }

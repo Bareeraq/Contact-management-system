@@ -13,8 +13,7 @@ body, html {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    min-height: 60vh; 
-    /* padding: 100px;  */
+    min-height: 60vh;
     background-color: #fff;
     padding-top: 20px;
     padding-right: 350px;

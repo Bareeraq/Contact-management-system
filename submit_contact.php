@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "Bareera@21";
@@ -52,31 +54,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['gender'] = "Invalid gender selection. Please select Male, Female, or Other.";
     }
 
-    // If there are validation errors, display them
+    // After validating the form
     if (!empty($errors)) {
-        foreach ($errors as $field => $error) {
-            echo "<p style='color:red;'>$field: $error</p>";
-        }
+        $_SESSION['errors'] = $errors;
+        $_SESSION['form_data'] = $_POST;
+        header("Location: add_contact.php");
+        exit();
+    }
+
+    // If no validation errors, sanitize and insert data into the database
+    $first_name = mysqli_real_escape_string($conn, $first_name);
+    $last_name = mysqli_real_escape_string($conn, $last_name);
+    $email = mysqli_real_escape_string($conn, $email);
+    $phone = mysqli_real_escape_string($conn, $phone);
+    $address = mysqli_real_escape_string($conn, $address);
+    $gender = mysqli_real_escape_string($conn, $gender);
+
+    // Insert the data into the database
+    $sql = "INSERT INTO contacts (first_name, last_name, email, phone, address, gender)
+            VALUES ('$first_name', '$last_name', '$email', '$phone', '$address', '$gender')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Redirect to add_contact page with success message
+        header("Location: add_contact.php?message=New contact added successfully");
+        exit();
     } else {
-        // Sanitize data for insertion
-        $first_name = mysqli_real_escape_string($conn, $first_name);
-        $last_name = mysqli_real_escape_string($conn, $last_name);
-        $email = mysqli_real_escape_string($conn, $email);
-        $phone = mysqli_real_escape_string($conn, $phone);
-        $address = mysqli_real_escape_string($conn, $address);
-        $gender = mysqli_real_escape_string($conn, $gender);
-
-        // Insert the data into the database
-        $sql = "INSERT INTO contacts (first_name, last_name, email, phone, address, gender)
-                VALUES ('$first_name', '$last_name', '$email', '$phone', '$address', '$gender')";
-
-        if ($conn->query($sql) === TRUE) {
-            // Redirect to add_contact page with success message
-            header("Location: add_contact.php?message=New contact added successfully");
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     $conn->close();

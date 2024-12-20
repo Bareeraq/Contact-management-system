@@ -60,15 +60,14 @@ $conn->close();
 </head>
 <body>
     <div class="dashboard">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h2>Dashboard</h2>
+        <!-- Horizontal Navigation Bar -->
+        <nav class="navbar">
             <ul>
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php">Contacts</a></li>
                 <li><a href="add_contact.php">Add Contact</a></li>
             </ul>
-        </div> 
+        </nav>
         <div class="edit-contact-wrapper">
             <form class="edit-contact-form" action="edit_contact.php" method="POST">
                 <h2>Edit Contact</h2>
